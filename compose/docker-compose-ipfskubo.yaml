@@ -1,0 +1,21 @@
+version: '3'
+
+networks:
+  ipfsnet:
+    name: ipfs_net
+
+services:
+  ipfs_host:
+    container_name: ipfs_host
+    image: ipfs/kubo:v0.33.1
+    environment:
+      - IPFS_PROFILE=server
+    ports:
+      - "4001:4001"
+      - "5001:5001"
+      - "8080:8080"
+    volumes:
+      - ./var/ipfs_host:/data/ipfs/
+      - ./var/ipfs_host:/export
+    networks:
+      - ipfsnet
